@@ -1,0 +1,5 @@
+# images
+*.jpg
+
+# api key
+propublica_api_key.txt
