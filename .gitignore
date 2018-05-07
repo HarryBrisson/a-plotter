@@ -3,3 +3,6 @@
 
 # api key
 propublica_api_key.txt
+
+# jupyter notebook checkpoints
+*checkpoint.ipynb
