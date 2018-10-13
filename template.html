@@ -1,0 +1,47 @@
+<html>
+
+	<head>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	</head>
+
+	<body>
+		<a-scene>
+			<a-sky color="#c8f7f0"></a-sky>
+			<a-entity position="0 0 0" rotation="0 -90 0">
+				<a-camera look-controls wasd-controls="fly:true"></a-camera>
+			</a-entity>
+		</a-scene>
+
+		<script>
+
+			d = INSERT_DATA_HERE
+
+			// define each variable
+			xVar = INSERT_X_HERE
+			yVar = INSERT_Y_HERE
+			zVar = INSERT_Z_HERE
+
+
+			// create linear scales
+			xScale = d3.scaleLinear().range([-2,2]).domain(d3.extent(d, d => d[xVar]))
+			yScale = d3.scaleLinear().range([-2,2]).domain(d3.extent(d, d => d[yVar]))
+			zScale = d3.scaleLinear().range([-2,2]).domain(d3.extent(d, d => d[zVar]))
+
+			// create cubes for each channel
+			d3.select("a-scene").selectAll(".dataCube")
+					.data(d)
+				.enter().append("a-box")
+					.attr('class','dataCube')
+					.attr('height','1')
+					.attr('depth','1')
+					.attr('width','1')
+					.attr('opacity','.8')
+					.attr('position', d => xScale(d[xVar]) + " " + yScale(d[yVar]) + " " + zScale(d[zVar]))
+					.attr('src', d => d['img'])
+
+		</script>
+
+	</body>
+
+</html>
