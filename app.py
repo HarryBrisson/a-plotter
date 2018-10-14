@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 
 from aplotter import *
+from youtube_data_access.pull_youtube_data import *
 
 app = Flask(__name__)
 
@@ -15,8 +16,9 @@ def congress_demo():
 
 @app.route("/youtube")
 def youtube_demo():
-	query = request.args.get('q')
-	if query is None:
-		return "Coming Soon: Input for Query Terms"
+	term = request.args.get('q')
+	if term:
+		data_string = get_youtube_data_string_for_search_term(term,100)
+		return update_html_template(data_string,"'videos'","'subs'","'views'")
 	else:
-		return "Coming Soon: Viz for {}".format(query)
+		return "Coming Soon: Input for Query Terms"
