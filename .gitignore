@@ -2,7 +2,9 @@
 *.jpg
 
 # api key
-propublica_api_key.txt
+authentications/propublica_api_key.txt
+authentications/youtube_api_key.txt
+
 
 # jupyter notebooks
 *.ipynb
