@@ -4,8 +4,8 @@
 # api key
 propublica_api_key.txt
 
-# jupyter notebook checkpoints
-*checkpoint.ipynb
+# jupyter notebooks
+*.ipynb
 
 # misc
 *.DS_Store
