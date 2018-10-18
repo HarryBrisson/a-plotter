@@ -84,3 +84,8 @@ def get_youtube_data_string_for_search_term(term,n):
     data_string = get_data_string_for_youtube_channels(channel_ids)
     return data_string
 
+
+def get_test_youtube_data_string():
+    with open("youtube_data_access/test_youtube_data_string.txt") as f:
+        test_data_string = f.read()
+    return test_data_string
