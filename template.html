@@ -7,21 +7,44 @@
 
 	<body>
 		<a-scene>
-			<a-sky color="#c8f7f0"></a-sky>
-			<a-entity position="0 0 0" rotation="0 -90 0">
+
+			<!-- room dimensions // colors from https://javier.xyz/cohesive-colors/ -->
+			<a-plane height="5" width="5" length="5" position="0 0 -2.5" rotation="0 0 0" color="#555E7B" opacity=.8></a-plane><!-- north wall -->
+			<a-plane height="5" width="5" length="5" position="0 0 2.5" rotation="0 -180 0" color="#B7D968" opacity=.8></a-plane><!-- south wall -->
+			<a-plane height="5" width="5" length="5" position="-2.5 0 0" rotation="0 90 0" color="#B576AD" opacity=.8></a-plane><!-- west wall -->
+			<a-plane height="5" width="5" length="5" position="2.5 0 0" rotation="0 -90 0" color="#E04644" opacity=.8></a-plane><!-- east wall -->
+			<a-plane height="5" width="5" length="5" position="0 -2.5 0" rotation="-90 0 0" color="#FDE47F" opacity=.8></a-plane><!-- floor -->
+			<a-plane height="5" width="5" length="5" position="0 2.5 0" rotation="90 0 0" color="#7CCCE5" opacity=.8></a-plane><!-- ceiling -->
+
+			<!-- need to add labels -->
+
+			<!-- viewer -->
+			<a-entity position="0 -2 0" rotation="0 0 0">
 				<a-camera look-controls wasd-controls="fly:true"></a-camera>
 			</a-entity>
+
 		</a-scene>
 
 		<script>
 
+			// data plugged in by app.py
 			d = INSERT_DATA_HERE
 
-			// define each variable
+			// variable names plugged in by app.py
 			xVar = INSERT_X_HERE
 			yVar = INSERT_Y_HERE
 			zVar = INSERT_Z_HERE
 
+			// eventually want to transition to a dictionary structure
+			vList = [xVar, yVar, zVar]
+
+			// convert to variables to numeric
+			for (i=0;i<vList.length;i++) {
+				v = vList[i];
+				for (r=0;r<d.length;r++) {
+					d[r][v] = +d[r][v]
+				}
+			}
 
 			// create linear scales
 			xScale = d3.scaleLinear().range([-2,2]).domain(d3.extent(d, d => d[xVar]))
@@ -33,9 +56,9 @@
 					.data(d)
 				.enter().append("a-box")
 					.attr('class','dataCube')
-					.attr('height','1')
-					.attr('depth','1')
-					.attr('width','1')
+					.attr('height','.4')
+					.attr('depth','.4')
+					.attr('width','.4')
 					.attr('opacity','.8')
 					.attr('position', d => xScale(d[xVar]) + " " + yScale(d[yVar]) + " " + zScale(d[zVar]))
 					.attr('src', d => d['img'])
