@@ -22,7 +22,7 @@ def get_list_of_youtube_channels(term,n):
                 pass
 
     # get user ids from urls    
-    channel_ids_rough = [l.split("/")[l.split("/").index('channel')+1] for l in links]
+    channel_ids_rough = [l.split("/")[l.split("/").index('channel')+1] for l in links if "channel" in l.split("/")]
     channel_ids = [c.split("?")[0] for c in channel_ids_rough]
 
     # remove duplicates
