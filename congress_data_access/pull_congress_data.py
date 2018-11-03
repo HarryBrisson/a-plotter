@@ -94,6 +94,8 @@ def get_vote_positions_dataframe(vote_breakdown):
 
 def create_voting_dataframe(congress_number,chamber):
     
+	# start with photos?
+
     vote_breakdown = get_vote_data(congress_number,chamber,1,1)
     votes_df = get_vote_positions_dataframe(vote_breakdown)
     print("created new voting dataframe")
@@ -123,3 +125,14 @@ def create_voting_dataframe(congress_number,chamber):
                 break
         
     return votes_df
+
+
+def binarize_df(votes_df):
+
+    binary_df = votes_df[['bioguide']]
+
+    for c in votes_df.columns:
+        if c != "bioguide":
+            binary_df[c] = (votes_df[c]=='Yes').astype(int)
+            
+    return binary_df
