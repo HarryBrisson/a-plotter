@@ -4,6 +4,7 @@
 import requests
 import pandas as pd
 
+from congress_data_pca import *
 
 def get_congressperson_data():
 	r = requests.get('https://theunitedstates.io/congress-legislators/legislators-current.json')
@@ -127,12 +128,3 @@ def create_voting_dataframe(congress_number,chamber):
     return votes_df
 
 
-def binarize_df(votes_df):
-
-    binary_df = votes_df[['bioguide']]
-
-    for c in votes_df.columns:
-        if c != "bioguide":
-            binary_df[c] = (votes_df[c]=='Yes').astype(int)
-            
-    return binary_df

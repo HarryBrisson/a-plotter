@@ -19,3 +19,14 @@ def get_triplot_df_from_votes_df(votes_df):
     pdf = pdf.join(bioguides_only_df)
     
     return pdf
+
+
+def binarize_df(votes_df):
+
+    binary_df = votes_df[['bioguide']]
+
+    for c in votes_df.columns:
+        if c != "bioguide":
+            binary_df[c] = (votes_df[c]=='Yes').astype(int)
+            
+    return binary_df
