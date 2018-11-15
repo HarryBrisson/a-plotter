@@ -86,6 +86,6 @@ def get_youtube_data_string_for_search_term(term,n):
 
 
 def get_test_youtube_data_string():
-    with open("youtube_data_access/test_youtube_data_string.txt") as f:
+    with open("youtube_demo/test_youtube_data_string.txt") as f:
         test_data_string = f.read()
     return test_data_string
